@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import StrEnum
 from typing import Literal, Optional
 
 from pydantic import BaseModel
@@ -11,7 +11,7 @@ class SegmentUpdateEntity(BaseModel):
     enabled: Optional[bool] = None
 
 
-class ParentMode(str, Enum):
+class ParentMode(StrEnum):
     FULL_DOC = "full-doc"
     PARAGRAPH = "paragraph"
 
@@ -95,13 +95,13 @@ class WeightKeywordSetting(BaseModel):
 
 
 class WeightModel(BaseModel):
-    weight_type: str
+    weight_type: Optional[str] = None
     vector_setting: Optional[WeightVectorSetting] = None
     keyword_setting: Optional[WeightKeywordSetting] = None
 
 
 class RetrievalModel(BaseModel):
-    search_method: Literal["hybrid_search", "semantic_search", "full_text_search"]
+    search_method: Literal["hybrid_search", "semantic_search", "full_text_search", "keyword_search"]
     reranking_enable: bool
     reranking_model: Optional[RerankingModel] = None
     reranking_mode: Optional[str] = None
